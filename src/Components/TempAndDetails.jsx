@@ -69,23 +69,23 @@ const TempAndDetails = ({
 
     return (
         <div>
-            <div className="flex items-center justify-center py-6 text-xl text-cyan-300">
+            <div className="flex items-center justify-center py-6 text-xl font-medium">
                 <p>{details}</p>
             </div>
-            <div className="flex flex-row items-center justify-between py-3">
+            <div className="flex flex-row items-center justify-between py-3 font-medium">
                 <img
                     src={icon}
                     alt="weather icon"
-                    className="w-20"
+                    className="w-30"
                 />
                 <p className="text-5xl">{`${temp.toFixed()}°`}</p>
-                <div className="flex flex-col space-y-3 items-start">
+                <div className="flex flex-col space-y-3 items-start font-medium">
                     {verticalDetails.map(({ id, Icon, title, value }) => (
                         <div
                             key={id}
-                            className="flex font-light text-sm items-center justify-center"
+                            className="flex text-sm items-center justify-center"
                         >
-                            <Icon size={18} className="mr-1" />
+                            <Icon size={20} className="mr-1" />
                             {`${title}: `}
                             <span className="font-medium ml-1">{value}</span>
                         </div>
@@ -93,13 +93,13 @@ const TempAndDetails = ({
                 </div>
             </div>
 
-            <div className="flex flex-row items-center justify-center space-x-10 text-sm py-3">
+            <div className="flex flex-row items-center justify-center space-x-10 font-medium text-sm py-3">
                 {horizontalDetails.map(({ id, Icon, title, value }) => (
                     <div key={id} className="flex flex-row items-center">
                         <Icon size={30} />
-                        <p className="font-light ml-1">
+                        <p className=" ml-1">
                             {`${title}: `}
-                            <span className="font-medium ml-1">{value}</span>
+                            <span className=" ml-1">{value}</span>
                         </p>
                     </div>
                 ))}

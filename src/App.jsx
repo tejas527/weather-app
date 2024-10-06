@@ -70,18 +70,32 @@ import getFormattedWeatherData from './Context';
 import { ToastContainer,toast } from 'react-toastify';
 import'react-toastify/dist/ReactToastify.css';
 
-import Clear from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/Clear.jpg';
+import Clear from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/clearsky.jpg';
 import Fog from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/fog.png';
 import Cloudy from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/Cloudy.jpg';
-import Rainy from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/Rainy.jpg';
-import Snow from '/C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/snow.jpg';
+import Rainy from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/rain4.png';
+import Snow from '/C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/snow2.jpg';
 import Stormy from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/Stormy.jpg';
 import Sunny from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/Sunny.jpg';
 import ForecastChart from './Components/ForecastChart';
 
 const backgroundImages = {
-  
-}
+  haze: Fog,
+  mist: Fog,
+  smoke: Fog,
+  dust: Fog,
+  fog: Fog,
+  sand: Fog,
+  ash: Fog,
+  clear: Clear,
+  cloud: Cloudy,
+  rain: Rainy,
+  drizzle: Rainy,
+  thunder: Stormy,
+  tornado: Stormy,
+  snow: Snow,
+  sun: Sunny,
+};
 
 
 function capitalizeFirstLetter(string){
@@ -121,15 +135,16 @@ const App = () => {
   },[query,units]);
 
   const formatBackground = () => {
-    if(!weather) return "from-cyan-600 to-blue-700";
-    const threshold = units === 'metric' ? 30 : 60;
-    if(weather.temp <= threshold) return "from-cyan-600 to-blue-700";
-    return "from-yellow-600 to-orange-700"
+    if (!weather) return "from-cyan-600 to-blue-700";
+    const { details } = weather;
+    const condition = Object.keys(backgroundImages).find(cond => details.toLowerCase().includes(cond));
+    const backgroundImage = condition ? backgroundImages[condition] : null;
+    return backgroundImage ? `url(${backgroundImage})` : "from-cyan-600 to-blue-700";
   }
 
 
   return (
-    <div className={`mx-auto max-w-screen-lg mt-4 py-5 px-32 bg-gradient-to-br shadow-xl shadow-gray-400 ${formatBackground()}`}>
+    <div className={`mx-auto max-w-screen-lg mt-4 py-5 px-32 bg-gradient-to-br shadow-xl shadow-gray-400`} style={{ backgroundImage: formatBackground()}}>
       <Inputs setQuery={setQuery} setUnits={setUnits} onKeyUp={(e) => {
               if (e.key === 'Enter') {
                 getWeather()
@@ -138,7 +153,6 @@ const App = () => {
         <>
         <TimeAndLocation weather={weather}/>
         <TempAndDetails weather={weather} units={units}/>
-        <Forecast title='3 hour step forecast' data={weather.hourly}/>
         <Forecast title='daily forecast' data={weather.daily}/>
         <ForecastChart forecastData={weather.daily}/>
         </>
