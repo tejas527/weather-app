@@ -1,17 +1,15 @@
-// ForecastChart.jsx
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 
-// Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const ForecastChart = ({ dailyData }) => {
-    // Prepare data for the chart
-    const labels = dailyData.map(day => day.title); // Day titles (e.g., Mon, Tue)
-    const temperatures = dailyData.map(day => day.temp); // Daily temperatures
+    console.log(dailyData);
 
-    // Chart data structure
+    const labels = dailyData.map(day => day.title); 
+    const temperatures = dailyData.map(day => day.temp);
+
     const data = {
         labels: labels,
         datasets: [
@@ -26,17 +24,28 @@ const ForecastChart = ({ dailyData }) => {
         ],
     };
 
-    // Chart options
     const options = {
         responsive: true,
         plugins: {
             legend: {
                 display: true,
                 position: 'top',
+                labels: {
+                    color: 'black', 
+                    font: {
+                        weight: 'bold',
+                        size: 16, 
+                    },
+                },
             },
             title: {
                 display: true,
                 text: '5-Day Temperature Forecast',
+                color: 'black', 
+                font: {
+                    weight: 'bold',
+                    size: 20, 
+                },
             },
         },
         scales: {
@@ -45,19 +54,51 @@ const ForecastChart = ({ dailyData }) => {
                 title: {
                     display: true,
                     text: 'Temperature (°C)',
+                    color: 'black', 
+                    font: {
+                        weight: 'bold',
+                        size: 18, 
+                    },
+                },
+                ticks: {
+                    color: 'black', 
+                    font: {
+                        weight: 'bold',
+                        size: 14,
+                    },
+                },
+                grid: {
+                    color: 'rgba(0, 0, 0, 0.5)', 
+                    lineWidth: 1, 
                 },
             },
             x: {
                 title: {
                     display: true,
                     text: 'Days',
+                    color: 'black', 
+                    font: {
+                        weight: 'bold',
+                        size: 18, 
+                    },
+                },
+                ticks: {
+                    color: 'black',
+                    font: {
+                        weight: 'bold',
+                        size: 14, 
+                    },
+                },
+                grid: {
+                    color: 'rgba(0, 0, 0, 0.5)', 
+                    lineWidth: 1, 
                 },
             },
         },
     };
 
     return (
-        <div className="forecast-chart">
+        <div className="forecast-chart w-full text-black font-bold">
             <Line data={data} options={options} />
         </div>
     );

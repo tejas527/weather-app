@@ -3,6 +3,7 @@ import Inputs from './Components/Inputs';
 import TimeAndLocation from './Components/TimeandLocation';
 import TempAndDetails from './Components/TempAndDetails';
 import Forecast from './Components/Forecast';
+import ForecastChart from './Components/ForecastChart';
 import getFormattedWeatherData from './Context';
 
 import { ToastContainer,toast } from 'react-toastify';
@@ -95,7 +96,7 @@ const App = () => {
         <TimeAndLocation weather={weather}/>
         <TempAndDetails weather={weather} units={units}/>
         <Forecast title='daily forecast' data={weather.daily}/>
-        {/*<ForecastChart forecastData={weather.daily}/>*/}
+        <ForecastChart className='' dailyData={weather.daily} />
         </>
       )}
 
