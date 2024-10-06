@@ -70,17 +70,29 @@ import getFormattedWeatherData from './Context';
 import { ToastContainer,toast } from 'react-toastify';
 import'react-toastify/dist/ReactToastify.css';
 
+import Clear from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/Clear.jpg';
+import Fog from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/fog.png';
+import Cloudy from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/Cloudy.jpg';
+import Rainy from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/Rainy.jpg';
+import Snow from '/C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/snow.jpg';
+import Stormy from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/Stormy.jpg';
+import Sunny from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/Sunny.jpg';
+import ForecastChart from './Components/ForecastChart';
+
+const backgroundImages = {
+  
+}
+
+
 function capitalizeFirstLetter(string){
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 const App = () => {
 
-  const [query, setQuery] = useState({q:'kolkata'})
+  const [query, setQuery] = useState({q:''})
   const [units, setUnits] = useState('metric')
   const [weather,setWeather] = useState(null)
-
-
 
   const getWeather = async() => {
     const cityName = query.q ? query.q : 'current location';
@@ -89,9 +101,20 @@ const App = () => {
     const data=await getFormattedWeatherData({...query,units}).then(data => {
       toast.success(`Fetched weather data for ${data.name}, ${data.country}`)
       setWeather(data);
+      if (query.q) localStorage.setItem('lastSearchedCity', query.q);
     });
     console.log(data);
   }
+
+  useEffect(() => {
+    const lastSearchedCity = localStorage.getItem('lastSearchedCity');
+    if (lastSearchedCity) {
+      setQuery({ q: lastSearchedCity });
+    } 
+    else {
+      setQuery({ q: 'Chennai' });
+    }
+  }, []);
 
   useEffect(() => {
     getWeather();
@@ -117,6 +140,7 @@ const App = () => {
         <TempAndDetails weather={weather} units={units}/>
         <Forecast title='3 hour step forecast' data={weather.hourly}/>
         <Forecast title='daily forecast' data={weather.daily}/>
+        <ForecastChart forecastData={weather.daily}/>
         </>
       )}
 
