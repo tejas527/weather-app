@@ -1,22 +1,23 @@
-import { useState, useEffect } from 'react';
+
+{/*import { useState, useEffect } from 'react';
 import './App.css';
 import search from './assets/icons/search.svg';
-import getWeatherData from './Context/index';
+import getFormattedWeatherData from './Context/index';
 import BackgroundLayout from './Components/BackgroundLayout';
+import WeatherCard from './Components/WeatherCard';
 
 const App = () => {
   const [input, setInput] = useState('');
   const [weatherData, setWeatherData] = useState(null);
 
   const getWeather = async () => {
-    const data = await getWeatherData('weather', { q: input || 'berlin' });
-    setWeatherData(data);
+    const data = await getFormattedWeatherData({ q: input || 'berlin' });
+    setWeatherData(data);  // Ensure the weatherData is being set properly
     console.log(data);
   };
 
-  // Optional: Fetch weather when the app mounts with a default location
   useEffect(() => {
-    getWeather();
+    getWeather();  // Fetch weather when the app mounts
   }, []);
 
   return (
@@ -38,12 +39,91 @@ const App = () => {
           />
         </div>
       </nav>
-      <BackgroundLayout />
+      <BackgroundLayout weather={weatherData} />
       <main className='w-full flex flex-wrap gap-8 py-4 px-[10%] items-center justify-center'>
-        
+        {weatherData ? (
+          <WeatherCard
+            place={weatherData.name}
+            temperature={weatherData.temp}
+            windspeed={weatherData.wind_speed}
+            humidity={weatherData.humidity}
+            heatIndex={weatherData.feels_like}
+            iconString={weatherData.icon}
+            conditions={weatherData.details}
+          />
+        ) : (
+          <p>Loading...</p>
+        )}
       </main>
     </div>
   );
 };
 
+export default App;*/}
+import React, { useEffect, useState } from 'react';
+import Inputs from './Components/Inputs';
+import TimeAndLocation from './Components/TimeandLocation';
+import TempAndDetails from './Components/TempAndDetails';
+import Forecast from './Components/Forecast';
+import getFormattedWeatherData from './Context';
+
+import { ToastContainer,toast } from 'react-toastify';
+import'react-toastify/dist/ReactToastify.css';
+
+function capitalizeFirstLetter(string){
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+const App = () => {
+
+  const [query, setQuery] = useState({q:'kolkata'})
+  const [units, setUnits] = useState('metric')
+  const [weather,setWeather] = useState(null)
+
+
+
+  const getWeather = async() => {
+    const cityName = query.q ? query.q : 'current location';
+    toast.info(`Fetching weather data for ${capitalizeFirstLetter(cityName)}`);
+
+    const data=await getFormattedWeatherData({...query,units}).then(data => {
+      toast.success(`Fetched weather data for ${data.name}, ${data.country}`)
+      setWeather(data);
+    });
+    console.log(data);
+  }
+
+  useEffect(() => {
+    getWeather();
+  },[query,units]);
+
+  const formatBackground = () => {
+    if(!weather) return "from-cyan-600 to-blue-700";
+    const threshold = units === 'metric' ? 30 : 60;
+    if(weather.temp <= threshold) return "from-cyan-600 to-blue-700";
+    return "from-yellow-600 to-orange-700"
+  }
+
+
+  return (
+    <div className={`mx-auto max-w-screen-lg mt-4 py-5 px-32 bg-gradient-to-br shadow-xl shadow-gray-400 ${formatBackground()}`}>
+      <Inputs setQuery={setQuery} setUnits={setUnits} onKeyUp={(e) => {
+              if (e.key === 'Enter') {
+                getWeather()
+              }}}/>
+      {weather && (
+        <>
+        <TimeAndLocation weather={weather}/>
+        <TempAndDetails weather={weather} units={units}/>
+        <Forecast title='3 hour step forecast' data={weather.hourly}/>
+        <Forecast title='daily forecast' data={weather.daily}/>
+        </>
+      )}
+
+      <ToastContainer autoClose={2500} hideProgressBar={true} theme="colored"></ToastContainer>
+    </div>
+  );
+};
+
 export default App;
+

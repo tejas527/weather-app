@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import getWeatherData from '../Context/index';
+import React, { useEffect, useState } from 'react';
 import Clear from '../assets/images/Clear.jpg';
 import Fog from '../assets/images/fog.png';
 import Cloudy from '../assets/images/Cloudy.jpg';
@@ -8,23 +7,8 @@ import Snow from '../assets/images/snow.jpg';
 import Stormy from '../assets/images/Stormy.jpg';
 import Sunny from '../assets/images/Sunny.jpg';
 
-const BackgroundLayout = () => {
-  const [weather, setWeather] = useState(null); // Store weather data
+const BackgroundLayout = ({ weather }) => {  // Receive weather as prop
   const [image, setImage] = useState(Clear); // Default background image
-
-  // Fetch weather data for a default location
-  const getWeather = async () => {
-    try {
-      const data = await getWeatherData('weather', { q: 'berlin' });
-      setWeather(data); // Store weather data in state
-    } catch (error) {
-      console.error('Error fetching weather:', error);
-    }
-  };
-
-  useEffect(() => {
-    getWeather();
-  }, []); // Run once on mount
 
   useEffect(() => {
     if (weather && weather.weather && weather.weather[0]) {
@@ -47,7 +31,7 @@ const BackgroundLayout = () => {
         setImage(Sunny);
       }
     }
-  }, [weather]); // Update background when weather changes
+  }, [weather]); // Update background when weather prop changes
 
   return <img src={image} alt="weather_image" className="h-screen w-full fixed left-0 top-0 -z-[10]" />;
 };

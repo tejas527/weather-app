@@ -16,32 +16,32 @@ const WeatherCard = ({
     place,
     heatIndex,
     iconString,
-    cnfitions,
+    conditions,
 }) => {
-    const {icon,seticon}= useState(sun)
+    const {icon,setIcon}= useState(sun)
     const {time} = useDate()
     useEffect(() => {
         if(iconString){
             if(iconString.toLowerCase().includes('cloud')){
-                seticon(cloud)
+                setIcon(cloud)
             }
             else if(iconString.toLowerCase().includes('rain')){
-                seticon(rain)
+                setIcon(rain)
             }
             else if(iconString.toLowerCase().includes('fog')){
-                seticon(fog)
+                setIcon(fog)
             }
             else if(iconString.toLowerCase().includes('snow')){
-                seticon(snow)
+                setIcon(snow)
             }
             else if(iconString.toLowerCase().includes('wind')){
-                seticon(wind)
+                setIcon(wind)
             }
             else if(iconString.toLowerCase().includes('thunder')){
-                seticon(storm)
+                setIcon(storm)
             }
             else if(iconString.toLowerCase().includes('clear')){
-                seticon(sun)
+                setIcon(sun)
             }
         }
     },[iconString])
@@ -58,7 +58,18 @@ const WeatherCard = ({
             <p className='flex-1 text-center p-2'>{new Date().toDateString()}</p>
             <p className='flex-1 text-center p-2'>{time}</p>
         </div>
-        <div className='w-full flex justify-between items-center mt-4'></div>
+        <div className='w-full flex justify-between items-center mt-4 gap-4'>
+            <p className='flex-1 text-center p-2 fold-bold bg-blue-600 shadow rounded-lg'>Wind Speed<p className='font-normal'>{windspeed}</p></p>
+            <p className='flex-1 text-center p-2 font-bold bg-green-600 shadow rounded-lg'>Humidity<p className='font-normal'>{humidity}</p></p>
+        </div>
+        <div className='w-full p-3 mt-4 flex justify-between items-center'>
+            <p className='font-semibold text-lg'>Heat Index</p>
+            <p className='font-normal text-lg'>{heatIndex? heatIndex:'N/A'}</p>
+        </div>
+        <hr className='bg-slate-600'></hr>
+        <div className='w-full p-4 flex justify-center items-center text-3xl font-semibold'>
+            {conditions}
+        </div>
     </div>
   )
 }
