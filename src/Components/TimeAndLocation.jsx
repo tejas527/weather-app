@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { DateTime } from "luxon"; // Using Luxon for handling date and time
+import { DateTime } from "luxon"; 
 
 const TimeAndLocation = ({ weather: {formattedLocalTime, name,country },}) => {
 

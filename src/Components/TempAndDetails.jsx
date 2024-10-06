@@ -97,9 +97,9 @@ const TempAndDetails = ({
                 {horizontalDetails.map(({ id, Icon, title, value }) => (
                     <div key={id} className="flex flex-row items-center">
                         <Icon size={30} />
-                        <p className=" ml-1">
+                        <p className="ml-1">
                             {`${title}: `}
-                            <span className=" ml-1">{value}</span>
+                            <span className="ml-1">{value}</span>
                         </p>
                     </div>
                 ))}

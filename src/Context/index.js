@@ -57,15 +57,7 @@ return {
 };
 
 const formatForecastWeather = (secs,offset,data) => {
-    //hourly
-    const hourly = data.filter(f => f.dt > secs).slice(0,5).map((f) => ({
-        temp: f.main.temp,
-        title: formatToLocalTime(f.dt,offset,'hh:mm a'),
-        icon: iconUrlFromCode(f.weather[0].icon),
-        date: f.dt_txt,
-    }))
-
-    //daily
+   
     const daily = data
         .filter((f) => f.dt_txt.slice(-8) === "00:00:00")
         .map((f) => ({
@@ -75,8 +67,7 @@ const formatForecastWeather = (secs,offset,data) => {
             date: f.dt_txt,
         }));
 
-
-    return {hourly,daily};
+    return {daily};
 };
 
 
