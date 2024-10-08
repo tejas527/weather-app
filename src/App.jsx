@@ -86,7 +86,7 @@ const App = () => {
   }
 
   return (
-    <div className={`mx-auto py-5 px-32 bg-gradient-to-br shadow-xl shadow-gray-400`} style={{ backgroundImage: formatBackground()}}>
+    <div className={`mx-auto max-w-screen-lg mt-4 mb-4 py-5 px-32 bg-gradient-to-br shadow-xl shadow-gray-400`} style={{ backgroundImage: formatBackground()}}>
       <Inputs setQuery={setQuery} setUnits={setUnits} onKeyUp={(e) => {
               if (e.key === 'Enter') {
                 getWeather()
