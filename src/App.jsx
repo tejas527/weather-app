@@ -9,13 +9,13 @@ import getFormattedWeatherData from './Context';
 import { ToastContainer,toast } from 'react-toastify';
 import'react-toastify/dist/ReactToastify.css';
 
-import Clear from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/clearsky.jpg';
-import Fog from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/fog.png';
-import Cloudy from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/Cloudy.jpg';
-import Rainy from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/rain4.png';
-import Snow from '/C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/snow2.jpg';
-import Stormy from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/Stormy.jpg';
-import Sandy from 'C:/Users/Tejas/Desktop/WeatherApp/src/assets/images/sandy.jpg';
+import Clear from 'C:/Users/Tejas/Desktop/Projects/WeatherApp/src/assets/images/clearsky.jpg';
+import Fog from 'C:/Users/Tejas/Desktop/Projects/WeatherApp/src/assets/images/fog.png';
+import Cloudy from 'C:/Users/Tejas/Desktop/Projects/WeatherApp/src/assets/images/Cloudy.jpg';
+import Rainy from 'C:/Users/Tejas/Desktop/Projects/WeatherApp/src/assets/images/rain4.png';
+import Snow from '/C:/Users/Tejas/Desktop/Projects/WeatherApp/src/assets/images/snow2.jpg';
+import Stormy from 'C:/Users/Tejas/Desktop/Projects/WeatherApp/src/assets/images/Stormy.jpg';
+import Sandy from 'C:/Users/Tejas/Desktop/Projects/WeatherApp/src/assets/images/sandy.jpg';
 
 const backgroundImages = {
   haze: Fog,
@@ -86,7 +86,7 @@ const App = () => {
   }
 
   return (
-    <div className={`mx-auto max-w-screen-lg mt-4 py-5 px-32 bg-gradient-to-br shadow-xl shadow-gray-400`} style={{ backgroundImage: formatBackground()}}>
+    <div className={`mx-auto py-5 px-32 bg-gradient-to-br shadow-xl shadow-gray-400`} style={{ backgroundImage: formatBackground()}}>
       <Inputs setQuery={setQuery} setUnits={setUnits} onKeyUp={(e) => {
               if (e.key === 'Enter') {
                 getWeather()

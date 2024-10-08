@@ -98,7 +98,7 @@ const ForecastChart = ({ dailyData }) => {
     };
 
     return (
-        <div className="forecast-chart w-full text-black font-bold">
+        <div className="forecast-chart w-full max-w-2xl mx-auto text-black font-bold">
             <Line data={data} options={options} />
         </div>
     );
