@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Inputs from './Components/Inputs';
-import TimeAndLocation from './Components/TimeandLocation';
+import TimeAndLocation from './Components/TimeAndLocation';
 import TempAndDetails from './Components/TempAndDetails';
 import Forecast from './Components/Forecast';
 import ForecastChart from './Components/ForecastChart';
