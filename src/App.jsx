@@ -9,13 +9,13 @@ import getFormattedWeatherData from './Context';
 import { ToastContainer,toast } from 'react-toastify';
 import'react-toastify/dist/ReactToastify.css';
 
-import Clear from 'C:/Users/Tejas/Desktop/Projects/WeatherApp/src/assets/images/clearsky.jpg';
-import Fog from 'C:/Users/Tejas/Desktop/Projects/WeatherApp/src/assets/images/fog.png';
-import Cloudy from 'C:/Users/Tejas/Desktop/Projects/WeatherApp/src/assets/images/Cloudy.jpg';
-import Rainy from 'C:/Users/Tejas/Desktop/Projects/WeatherApp/src/assets/images/rain4.png';
-import Snow from '/C:/Users/Tejas/Desktop/Projects/WeatherApp/src/assets/images/snow2.jpg';
-import Stormy from 'C:/Users/Tejas/Desktop/Projects/WeatherApp/src/assets/images/Stormy.jpg';
-import Sandy from 'C:/Users/Tejas/Desktop/Projects/WeatherApp/src/assets/images/sandy.jpg';
+import Clear from '../src/assets/images/clearsky.jpg';
+import Fog from '../src/assets/images/fog.png';
+import Cloudy from '../src/assets/images/Cloudy.jpg';
+import Rainy from '../src/assets/images/rain4.png';
+import Snow from '../src/assets/images/snow2.jpg';
+import Stormy from '../src/assets/images/Stormy.jpg';
+import Sandy from '../src/assets/images/sandy.jpg';
 
 const backgroundImages = {
   haze: Fog,

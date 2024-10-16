@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 
-const API_KEY = 'd98d3c3247855155380cc1c2669abea9'
+const API_KEY = process.env.API_KEY
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/'
 
 const getWeatherData = (infoType, searchParams) => {
@@ -15,7 +15,7 @@ const iconUrlFromCode = (icon) => `http://openweathermap.org/img/wn/${icon}@2x.p
 const formatToLocalTime =(
     secs,
     offset,
-    format = "cccc,dd,LLL,yyyy' | Local time: 'hh:mm a"
+    format = "cccc, dd LLL yyyy' | Local time: 'hh:mm a"
 ) => 
     DateTime.fromSeconds(secs+offset, {zone: "utc"}).toFormat(format);
 
